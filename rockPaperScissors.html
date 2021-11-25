@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script>
+            function computerPlay(){
+                var options = ["rock", "paper", "scissors"];
+                var randomOption = Math.floor(Math.random() * options.length);
+                return options[randomOption];
+            }
+
+            function playRound(playerSelection, computerSelection){
+               const comparisons = {
+                   rock: {weakTo: "paper", strongTo: "scissors"},
+                   paper: {weakTo: "scissors", strongTo: "rock"}, 
+                   scissors: {weakTo: "rock", strongTo: "paper"} 
+               }
+
+               if (comparisons[playerSelection].strongTo === computerSelection){
+                   return "You win, " + playerSelection + " beats " + computerSelection;
+               } else if (comparisons[playerSelection].weakTo === computerSelection){
+                   return "You lose, " + computerSelection + " beats " + playerSelection;
+               } else {
+                   return "Tie, " + playerSelection + " and " + computerSelection;
+               }
+            }
+
+            function game(){
+
+                var userScore = 0;
+                var computerScore = 0;
+
+                for (let i = 0; i < 5; i++){
+                    let user = window.prompt("Rock, paper, or scissors?");
+                    user = user.toLowerCase();
+                    computer = computerPlay();
+                    let wonString = playRound(user, computer);
+                    console.log(wonString);
+
+                    if (wonString.substring(0, 7) == "You win"){
+                        userScore++;
+                    } else if (wonString.substring(0,8) == "You lose"){
+                        computerScore++;
+                    }
+                }
+                if (userScore > computerScore){
+                    console.log("User wins with a total score of " + userScore + " to " + computerScore);
+                } else if (computerScore > userScore){
+                    console.log("Computer wins with a total score of " + computerScore + " to " + userScore);
+                } else {
+                    console.log("It's an overall tie with a score of " + computerScore + " to " + userScore);
+                }
+            }
+
+            game();
+
+
+
+
+
+        </script>
+    </body>
+</html>
